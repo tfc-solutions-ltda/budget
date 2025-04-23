@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { Client } from '@/types';
 import Link from 'next/link';
 
 export async function RecentClients() {
@@ -13,7 +14,7 @@ export async function RecentClients() {
     <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
       <h2 className="text-lg font-medium text-white mb-4">Clientes Recentes</h2>
       <div className="space-y-4">
-        {clients.map((client) => (
+        {clients.map((client: Client) => (
           <Link
             key={client.id}
             href={`/clients/${client.id}/edit`}

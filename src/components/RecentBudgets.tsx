@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
 
@@ -16,7 +17,7 @@ export async function RecentBudgets() {
     <div className="bg-gray-800 rounded-xl border border-gray-700 p-6">
       <h2 className="text-lg font-medium text-white mb-4">Orçamentos Recentes</h2>
       <div className="space-y-4">
-        {budgets.map((budget) => (
+        {budgets.map((budget: any) => (
           <Link
             key={budget.id}
             href={`/budgets/${budget.id}/edit`}
@@ -30,25 +31,18 @@ export async function RecentBudgets() {
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-white font-medium">
-                  R$ {budget.totalValue.toFixed(2)}
-                </p>
-                <p className="text-gray-400 text-sm">
-                  {budget.totalHours.toFixed(1)} horas
-                </p>
+                <p className="text-white font-medium">R$ {budget.totalValue.toFixed(2)}</p>
+                <p className="text-gray-400 text-sm">{budget.totalHours.toFixed(1)} horas</p>
               </div>
             </div>
           </Link>
         ))}
       </div>
       <div className="mt-4">
-        <Link
-          href="/budgets"
-          className="text-blue-400 hover:text-blue-300 text-sm"
-        >
+        <Link href="/budgets" className="text-blue-400 hover:text-blue-300 text-sm">
           Ver todos os orçamentos →
         </Link>
       </div>
     </div>
   );
-} 
+}

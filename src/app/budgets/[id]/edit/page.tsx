@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
 import { useState, useEffect, use } from 'react';
@@ -804,7 +805,7 @@ export default function EditBudgetPage({ params }: { params: Promise<{ id: strin
 
               {/* Botões de Ação */}
               <div className="flex justify-end space-x-4">
-                {budgetForPDF && <ExportPDFButton budget={budgetForPDF} />}
+                {budgetForPDF && <ExportPDFButton budget={budgetForPDF as any} />}
                 <button
                   type="submit"
                   disabled={loading}

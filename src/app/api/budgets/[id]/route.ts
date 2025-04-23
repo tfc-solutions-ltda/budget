@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth/config';
@@ -121,7 +122,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const estimatedDays = Math.ceil(totalHoursWithTests / availableHours);
 
     // Executa a transação em duas etapas
-    const result = await prisma.$transaction(async (tx) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const result = await prisma.$transaction(async (tx: any) => {
       // 1. Busca o orçamento atual com todas as stories e activities
       const currentBudget = await tx.budget.findUnique({
         where: { id },
@@ -164,18 +166,23 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       // Identifica stories para manter, criar e remover
       const storiesToKeep = newStories.filter((newStory: Story) => {
         // Verifica se a story existe no banco
-        const exists = currentStories.some(currentStory => currentStory.id === newStory.id);
+        const exists = currentStories.some(
+          (currentStory: { id: string }) => currentStory.id === newStory.id
+        );
         return exists;
       });
-      
+
       const storiesToCreate = newStories.filter((newStory: Story) => {
         // Verifica se a story NÃO existe no banco
-        const exists = currentStories.some(currentStory => currentStory.id === newStory.id);
+        const exists = currentStories.some(
+          (currentStory: { id: string }) => currentStory.id === newStory.id
+        );
         return !exists;
       });
 
-      const storiesToRemove = currentStories.filter(currentStory => 
-        !newStories.some((newStory: Story) => newStory.id === currentStory.id)
+      const storiesToRemove = currentStories.filter(
+        (currentStory: { id: string }) =>
+          !newStories.some((newStory: Story) => newStory.id === currentStory.id)
       );
 
       // Remove stories que não existem mais
@@ -183,15 +190,15 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         await tx.story.deleteMany({
           where: {
             id: {
-              in: storiesToRemove.map(story => story.id)
-            }
-          }
+              in: storiesToRemove.map((story: { id: any }) => story.id),
+            },
+          },
         });
       }
 
       // Atualiza stories existentes
       for (const story of storiesToKeep) {
-        const currentStory = currentStories.find(s => s.id === story.id);
+        const currentStory = currentStories.find((s: { id: any }) => s.id === story.id);
         if (!currentStory) continue;
 
         // Atualiza a story
@@ -200,7 +207,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
           data: {
             title: story.title,
             complexityFactor: story.complexityFactor || 1,
-          }
+          },
         });
 
         // Processa as activities da story
@@ -210,18 +217,23 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
         // Identifica activities para manter, criar e remover
         const activitiesToKeep = newActivities.filter((newActivity: Activity) => {
           // Verifica se a activity existe no banco
-          const exists = currentActivities.some(currentActivity => currentActivity.id === newActivity.id);
+          const exists = currentActivities.some(
+            (currentActivity: { id: string }) => currentActivity.id === newActivity.id
+          );
           return exists;
         });
 
         const activitiesToCreate = newActivities.filter((newActivity: Activity) => {
           // Verifica se a activity NÃO existe no banco
-          const exists = currentActivities.some(currentActivity => currentActivity.id === newActivity.id);
+          const exists = currentActivities.some(
+            (currentActivity: { id: string }) => currentActivity.id === newActivity.id
+          );
           return !exists;
         });
 
-        const activitiesToRemove = currentActivities.filter(currentActivity => 
-          !newActivities.some((newActivity: Activity) => newActivity.id === currentActivity.id)
+        const activitiesToRemove = currentActivities.filter(
+          (currentActivity: { id: string }) =>
+            !newActivities.some((newActivity: Activity) => newActivity.id === currentActivity.id)
         );
 
         // Remove activities que não existem mais
@@ -229,9 +241,9 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
           await tx.activity.deleteMany({
             where: {
               id: {
-                in: activitiesToRemove.map(activity => activity.id)
-              }
-            }
+                in: activitiesToRemove.map((activity: { id: any }) => activity.id),
+              },
+            },
           });
         }
 
@@ -244,7 +256,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
               description: activity.description,
               hours: activity.hours,
               complexityFactor: activity.complexityFactor || 1,
-            }
+            },
           });
         }
 
@@ -257,7 +269,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
               hours: activity.hours,
               complexityFactor: activity.complexityFactor || 1,
               storyId: story.id,
-            }))
+            })),
           });
         }
       }

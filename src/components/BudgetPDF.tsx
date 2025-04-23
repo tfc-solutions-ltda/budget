@@ -1,16 +1,11 @@
-import {
-  Document,
-  Page,
-  Text,
-  View,
-  StyleSheet,
-  Image,
-} from '@react-pdf/renderer';
-import { Budget, Client, Story, Activity } from '@prisma/client';
+import { Document, Page, Text, View, StyleSheet, Image } from '@react-pdf/renderer';
 import { getLogoBase64 } from '../../base-logo';
+import { Activity } from '@/types';
+import { Budget, Story } from '@/types';
+import { Client } from '@/types';
 
 // Logo em base64 (substitua pelo seu base64 real)
-const logo = getLogoBase64()
+const logo = getLogoBase64();
 const styles = StyleSheet.create({
   page: {
     padding: 30,
@@ -189,20 +184,12 @@ export function BudgetPDF({ budget }: BudgetPDFProps) {
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <Image
-            src={logo}
-            style={styles.logo}
-          />
+          <Image src={logo} style={styles.logo} />
           <Text style={styles.title}>{budget.title}</Text>
         </View>
 
         <View style={styles.clientInfo}>
-          {budget.client.logo && (
-            <Image
-              src={budget.client.logo}
-              style={styles.clientLogo}
-            />
-          )}
+          {budget.client.logo && <Image src={budget.client.logo} style={styles.clientLogo} />}
           <View style={styles.clientInfoText}>
             <Text style={styles.clientName}>{budget.client.name}</Text>
           </View>
@@ -231,9 +218,7 @@ export function BudgetPDF({ budget }: BudgetPDFProps) {
                 <View key={activity.id} style={styles.activity}>
                   <Text style={styles.activityTitle}>• {activity.title}</Text>
                   {activity.description && (
-                    <Text style={styles.activityDescription}>
-                      {activity.description}
-                    </Text>
+                    <Text style={styles.activityDescription}>{activity.description}</Text>
                   )}
                 </View>
               ))}
@@ -247,4 +232,4 @@ export function BudgetPDF({ budget }: BudgetPDFProps) {
       </Page>
     </Document>
   );
-} 
+}

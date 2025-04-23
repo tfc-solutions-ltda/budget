@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { prisma } from '@/lib/prisma';
 import { authOptions } from '@/lib/auth/config';
@@ -8,12 +8,12 @@ const ALLOWED_FILE_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
 
 export async function GET(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
-    const { id } = context.params;
+    const { id } = await params;
 
     if (!session) {
       return new NextResponse('Unauthorized', { status: 401 });
@@ -37,12 +37,15 @@ export async function GET(
 }
 
 export async function PUT(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params;
     const session = await getServerSession(authOptions);
-    const { id } = context.params;
+    if (!session?.user) {
+      return new NextResponse('Unauthorized', { status: 401 });
+    }
 
     if (!session) {
       return new NextResponse('Unauthorized', { status: 401 });
@@ -126,12 +129,12 @@ export async function PUT(
 }
 
 export async function DELETE(
-  request: Request,
-  context: { params: { id: string } }
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await getServerSession(authOptions);
-    const { id } = context.params;
+    const { id } = await params;
 
     if (!session) {
       return new NextResponse('Unauthorized', { status: 401 });
