@@ -30,7 +30,6 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     const budget = await prisma.budget.findUnique({
       where: {
         id,
-        userId: session.user.id,
       },
       include: {
         client: {
@@ -93,11 +92,10 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
-    // Verifica se o orçamento existe e pertence ao usuário
+    // Verifica se o orçamento existe
     const existingBudget = await prisma.budget.findUnique({
       where: {
         id,
-        userId: session.user.id,
       },
     });
 
