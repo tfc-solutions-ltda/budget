@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sistema de Orçamentos TFC Solutions
 
-## Getting Started
+Sistema interno para geração e gerenciamento de orçamentos de software para a TFC Solutions.
 
-First, run the development server:
+## O que é?
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Um sistema que permite criar e gerenciar orçamentos de software de forma simples e eficiente. Com ele você pode:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Cadastrar e gerenciar clientes
+- Criar orçamentos detalhados
+- Calcular automaticamente valores e prazos
+- Gerar PDFs dos orçamentos
+- Acompanhar o status de cada orçamento
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Como funciona?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Faça login no sistema
+2. Cadastre seus clientes
+3. Crie orçamentos para cada cliente
+4. Adicione os serviços e produtos necessários
+5. O sistema calcula automaticamente os valores e prazos
+6. Gere o PDF do orçamento
+7. Acompanhe o status de cada orçamento
 
-## Learn More
+## Licença
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Este projeto é proprietário da TFC Solutions.
