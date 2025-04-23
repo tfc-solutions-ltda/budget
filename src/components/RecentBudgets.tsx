@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { prisma } from '@/lib/prisma';
 import Link from 'next/link';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 export async function RecentBudgets() {
   const budgets = await prisma.budget.findMany({
@@ -27,7 +29,7 @@ export async function RecentBudgets() {
               <div>
                 <h3 className="text-white font-medium">{budget.client.name} - {budget.title}</h3>
                 <p className="text-gray-400 text-sm">
-                  {new Date(budget.createdAt).toLocaleDateString('pt-BR')} - {new Date(budget.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
+                  {format(new Date(budget.createdAt), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
                 </p>
               </div>
               <div className="text-right">

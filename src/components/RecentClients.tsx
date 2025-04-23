@@ -1,6 +1,8 @@
 import { prisma } from '@/lib/prisma';
 import { Client } from '@/types';
 import Link from 'next/link';
+import { format } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
 export async function RecentClients() {
   const clients = await prisma.client.findMany({
@@ -29,7 +31,7 @@ export async function RecentClients() {
               </div>
               <div className="text-right">
                 <p className="text-gray-400 text-sm">
-                  {new Date(client.createdAt).toLocaleDateString('pt-BR')}
+                  {format(new Date(client.createdAt), 'dd/MM/yyyy', { locale: ptBR })}
                 </p>
               </div>
             </div>
