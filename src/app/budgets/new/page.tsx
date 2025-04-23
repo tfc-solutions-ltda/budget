@@ -267,7 +267,7 @@ export default function NewBudgetPage() {
       }
 
       const data = await response.json();
-      router.push(`/budgets/${data.id}`);
+      router.push(`/budgets/${data.id}/edit`);
     } catch (error) {
       console.error('Error saving budget:', error);
       alert('Erro ao salvar orçamento. Por favor, tente novamente.');

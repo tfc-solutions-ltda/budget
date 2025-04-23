@@ -64,20 +64,13 @@ export default function BudgetsPage() {
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div className="text-center sm:text-left">
               <h1 className="text-2xl font-bold text-white">Orçamentos</h1>
-              <p className="mt-1 text-sm text-gray-400">
-                Gerencie seus orçamentos e propostas
-              </p>
+              <p className="mt-1 text-sm text-gray-400">Gerencie seus orçamentos e propostas</p>
             </div>
             <Link
               href="/budgets/new"
               className="inline-flex items-center justify-center px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
             >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -111,9 +104,7 @@ export default function BudgetsPage() {
                 </svg>
               </div>
               <h3 className="text-lg font-medium text-white">Nenhum orçamento cadastrado</h3>
-              <p className="mt-1 text-sm text-gray-400">
-                Comece criando seu primeiro orçamento
-              </p>
+              <p className="mt-1 text-sm text-gray-400">Comece criando seu primeiro orçamento</p>
               <div className="mt-6">
                 <Link
                   href="/budgets/new"
@@ -142,11 +133,21 @@ export default function BudgetsPage() {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-gray-700">
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">Cliente</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">Título</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">Data</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">Valor Total</th>
-                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">Ações</th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">
+                        Cliente
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">
+                        Título
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">
+                        Data
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">
+                        Valor Total
+                      </th>
+                      <th className="px-6 py-4 text-left text-sm font-medium text-gray-400">
+                        Ações
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-700">
@@ -206,31 +207,6 @@ export default function BudgetsPage() {
                               </svg>
                               Editar
                             </Link>
-                            <Link
-                              href={`/budgets/${budget.id}`}
-                              className="inline-flex items-center px-4 py-2 text-sm bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
-                            >
-                              <svg
-                                className="w-4 h-4 mr-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                                />
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={2}
-                                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                                />
-                              </svg>
-                              Visualizar
-                            </Link>
                           </div>
                         </td>
                       </tr>
@@ -244,4 +220,4 @@ export default function BudgetsPage() {
       </div>
     </AuthGuard>
   );
-} 
+}

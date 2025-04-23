@@ -29,7 +29,7 @@ export async function RecentClients() {
               </div>
               <div className="text-right">
                 <p className="text-gray-400 text-sm">
-                  {new Date(client.createdAt).toLocaleDateString()}
+                  {new Date(client.createdAt).toLocaleDateString('pt-BR')}
                 </p>
               </div>
             </div>

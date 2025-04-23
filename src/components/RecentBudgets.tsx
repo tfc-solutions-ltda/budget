@@ -25,9 +25,9 @@ export async function RecentBudgets() {
           >
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="text-white font-medium">{budget.client.name}</h3>
+                <h3 className="text-white font-medium">{budget.client.name} - {budget.title}</h3>
                 <p className="text-gray-400 text-sm">
-                  {new Date(budget.createdAt).toLocaleDateString()}
+                  {new Date(budget.createdAt).toLocaleDateString('pt-BR')} - {new Date(budget.createdAt).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
                 </p>
               </div>
               <div className="text-right">

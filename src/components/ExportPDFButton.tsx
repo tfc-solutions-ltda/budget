@@ -22,7 +22,7 @@ export function ExportPDFButton({ budget }: ExportPDFButtonProps) {
   return (
     <PDFDownloadLink
       document={<BudgetPDF budget={budget} />}
-      fileName={`orcamento-${budget.client.name.toLowerCase().replace(/\s+/g, '-')}-${
+      fileName={`${budget.client.name.toLowerCase().replace(/\s+/g, '-')}-${budget.title.toLowerCase().replace(/\s+/g, '-')}-${
         new Date().toISOString().split('T')[0]
       }.pdf`}
       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
